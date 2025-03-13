@@ -10,14 +10,14 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "tcslabsfjbs"
+    bucket = "s3apswara"
     key    = "eks/terraform.tfstate"
-    region = "us-east-1"
+    region = "ap-southeast-1"
   }
 }
 # Variables
 variable "cluster_name" {
-  default     = "eks-vijay"
+  default     = "eks-dev"
   description = "give a cluster name"
   type        = string
 }
@@ -485,7 +485,7 @@ resource "aws_eks_addon" "efs_csi" {
 resource "aws_eks_addon" "pod_identity_agent" {
   cluster_name  = aws_eks_cluster.main.name
   addon_name    = "eks-pod-identity-agent"
-  addon_version = "v1.3.5-eksbuild.1"  # Check latest version
+  addon_version = "v1.3.4-eksbuild.1"  # Check latest version
 
   depends_on = [
     aws_eks_node_group.main
