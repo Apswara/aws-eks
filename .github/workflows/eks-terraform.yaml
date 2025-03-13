@@ -1,7 +1,8 @@
 name: EKS Terraform Deployment
 
 on: workflow_dispatch
-
+env:
+  AWS_REGION : "ap-southeast-1"
 permissions:
       id-token: write   
       contents: read    
@@ -19,7 +20,7 @@ jobs:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::430118834478:role/gh-actions-role
+        role-to-assume: arn:aws:iam::430118834478:role/Gh-aws-access
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Setup Terraform
