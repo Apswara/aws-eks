@@ -26,16 +26,16 @@ jobs:
       run: aws eks update-kubeconfig --name eks-dev --region ap-southeast-1 
     - name: kubectl command
       run: |
-        helm install arc \
+        helm upgrade --install arc \
          --namespace arc-systems \
          --create-namespace \
          oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
-        helm install arc-runner-set \
+        helm upgrade --install arc-runner-set \
           --namespace arc-runners \
           --create-namespace \
-          --set githubConfigUrl="https://github.com/Apswara" \
+          --set githubConfigUrl="https://github.com/Apswara/aws-eks" \
           --set githubConfigSecret.github_token="${{ secrets.GH_PAT }}" \
           oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
         kubectl get po -A
-        kubect get ns 
+        kubectl get ns 
         
